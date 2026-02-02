@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JOverflow.AppHost", "JOverflow.AppHost\JOverflow.AppHost.csproj", "{8E431535-88FC-474B-9692-FB73E3C7690A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JOverflow.ServiceDefaults", "JOverflow.ServiceDefaults\JOverflow.ServiceDefaults.csproj", "{9538D3C2-7AF0-4727-A0C1-CB64DBB339BC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8E431535-88FC-474B-9692-FB73E3C7690A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E431535-88FC-474B-9692-FB73E3C7690A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E431535-88FC-474B-9692-FB73E3C7690A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E431535-88FC-474B-9692-FB73E3C7690A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9538D3C2-7AF0-4727-A0C1-CB64DBB339BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9538D3C2-7AF0-4727-A0C1-CB64DBB339BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9538D3C2-7AF0-4727-A0C1-CB64DBB339BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9538D3C2-7AF0-4727-A0C1-CB64DBB339BC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
