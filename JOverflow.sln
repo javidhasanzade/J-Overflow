@@ -4,6 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JOverflow.AppHost", "JOverf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JOverflow.ServiceDefaults", "JOverflow.ServiceDefaults\JOverflow.ServiceDefaults.csproj", "{9538D3C2-7AF0-4727-A0C1-CB64DBB339BC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{923EF2DC-694C-4358-BDC0-74AB436957F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestionService", "QuestionService\QuestionService.csproj", "{79698F29-74C7-42D9-B7B0-8A51D84B8AFC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,12 @@ Global
 		{9538D3C2-7AF0-4727-A0C1-CB64DBB339BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9538D3C2-7AF0-4727-A0C1-CB64DBB339BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9538D3C2-7AF0-4727-A0C1-CB64DBB339BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79698F29-74C7-42D9-B7B0-8A51D84B8AFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79698F29-74C7-42D9-B7B0-8A51D84B8AFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79698F29-74C7-42D9-B7B0-8A51D84B8AFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79698F29-74C7-42D9-B7B0-8A51D84B8AFC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{79698F29-74C7-42D9-B7B0-8A51D84B8AFC} = {923EF2DC-694C-4358-BDC0-74AB436957F2}
 	EndGlobalSection
 EndGlobal
