@@ -3,10 +3,10 @@ var builder = DistributedApplication.CreateBuilder(args);
 #pragma warning disable ASPIRECERTIFICATES001
 var keycloak = builder.AddKeycloak("keycloack", 6001)
     .WithoutHttpsCertificate()
-    .WithDataVolume("keycloak-data");
+    .WithDataVolume("keycloack-data");
 #pragma warning restore ASPIRECERTIFICATES001
 
-var postgres = builder.AddPostgres("postgres", port: 5432)
+var postgres = builder.AddPostgres("postgres", port: 5433)
     .WithDataVolume("postgres-data")
     .WithPgAdmin();
 
