@@ -21,15 +21,23 @@ var typesenseContainer = typesense.GetEndpoint("typesense");
 
 var questionDb = postgres.AddDatabase("questionDb");
 
+var rabbitmq = builder.AddRabbitMQ("messaging")
+    .WithDataVolume("rabbitmq-data")
+    .WithManagementPlugin(port: 15672);
+
 var questionService = builder.AddProject<Projects.QuestionService>("question-service")
     .WithReference(keycloak)
     .WithReference(questionDb)
+    .WithReference(rabbitmq)
     .WaitFor(keycloak)
-    .WaitFor(questionDb);
+    .WaitFor(questionDb)
+    .WaitFor(rabbitmq);
 
 var searchService = builder.AddProject<Projects.SearchService>("search-service")
     .WithEnvironment("typesense-api-key", typesenseApiKey)
     .WithReference(typesenseContainer)
-    .WaitFor(typesense);
+    .WithReference(rabbitmq)
+    .WaitFor(typesense)
+    .WaitFor(rabbitmq);
 
 builder.Build().Run();

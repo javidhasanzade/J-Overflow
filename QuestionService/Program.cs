@@ -1,5 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 using QuestionService.Data;
+using Wolverine;
+using Wolverine.RabbitMQ;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +19,18 @@ builder.Services.AddAuthentication()
         options.Audience = "joverflow";
     });
 builder.AddNpgsqlDbContext<QuestionDbContext>("questionDb");
+
+builder.Services.AddOpenTelemetry().WithTracing(traceProvideBuilder =>
+{
+    traceProvideBuilder.SetResourceBuilder(ResourceBuilder.CreateDefault()
+        .AddService(builder.Environment.ApplicationName)).AddSource("Wolverine");
+});
+
+builder.Host.UseWolverine(options =>
+{
+    options.UseRabbitMqUsingNamedConnection("messaging").AutoProvision();
+    options.PublishAllMessages().ToRabbitExchange("questions");
+});
 
 var app = builder.Build();
 
@@ -39,7 +55,7 @@ try
 }
 catch (Exception e)
 {
-    var logger =  services.GetRequiredService<ILogger<Program>>();
+    var logger = services.GetRequiredService<ILogger<Program>>();
     logger.LogError(e, "An error occurred while migrating or seeding the DB.");
 }
 
