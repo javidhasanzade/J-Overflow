@@ -13,7 +13,7 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.AddServiceDefaults();
 builder.Services.AddAuthentication()
-    .AddKeycloakJwtBearer(serviceName: "keycloak", realm: "joverflow", options =>
+    .AddKeycloakJwtBearer(serviceName: "keycloack", realm: "joverflow", options =>
     {
         options.RequireHttpsMetadata = false;
         options.Audience = "joverflow";
@@ -40,6 +40,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

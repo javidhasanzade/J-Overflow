@@ -1,16 +1,18 @@
 using System.Security.Claims;
+using Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuestionService.Data;
 using QuestionService.DTOs;
 using QuestionService.Models;
+using Wolverine;
 
 namespace QuestionService.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class QuestionsController(QuestionDbContext dbContext) : ControllerBase
+public class QuestionsController(QuestionDbContext dbContext, IMessageBus messageBus) : ControllerBase
 {
     [Authorize]
     [HttpPost]
@@ -39,6 +41,9 @@ public class QuestionsController(QuestionDbContext dbContext) : ControllerBase
 
         dbContext.Questions.Add(question);
         await dbContext.SaveChangesAsync();
+
+        await messageBus.PublishAsync(new QuestionCreated(question.Id, question.Title, question.Content,
+            question.CreatedAt, question.TagSlugs));
 
         return Created($"/questions/{question.Id}", question);
     }
