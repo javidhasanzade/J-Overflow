@@ -5,8 +5,10 @@ var compose = builder.AddDockerComposeEnvironment("production")
 
 #pragma warning disable ASPIRECERTIFICATES001
 var keycloak = builder.AddKeycloak("keycloack", 6001)
-    .WithoutHttpsCertificate()
-    .WithDataVolume("keycloack-data");
+    .WithDataVolume("keycloack-data")
+    .WithEnvironment("KC_HTTP_ENABLED", "true")
+    .WithEnvironment("KC_HOSTNAME_STRICT", "false")
+    .WithEndpoint(6001, 8080, "keycloak", isExternal: true);
 #pragma warning restore ASPIRECERTIFICATES001
 
 var postgres = builder.AddPostgres("postgres", port: 5433)
