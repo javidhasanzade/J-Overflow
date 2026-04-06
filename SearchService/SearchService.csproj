@@ -7,14 +7,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0" />
         <PackageReference Include="Typesense" Version="8.0.0" />
-        <PackageReference Include="WolverineFx.RabbitMQ" Version="5.15.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Contracts\Contracts.csproj" />
-      <ProjectReference Include="..\JOverflow.ServiceDefaults\JOverflow.ServiceDefaults.csproj" />
+        <ProjectReference Include="..\Common\Common.csproj" />
+        <ProjectReference Include="..\Contracts\Contracts.csproj" />
     </ItemGroup>
 
 </Project>

@@ -8,20 +8,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Aspire.Keycloak.Authentication" Version="13.2.1-preview.1.26180.6" />
-        <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="13.2.1" />
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0" />
+        <PackageReference Include="Aspire.Keycloak.Authentication" Version="13.2.1-preview.1.26180.6"/>
+        <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="13.2.1"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.2">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Polly" Version="8.6.6" />
-        <PackageReference Include="WolverineFx.RabbitMQ" Version="5.15.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Contracts\Contracts.csproj" />
-      <ProjectReference Include="..\JOverflow.ServiceDefaults\JOverflow.ServiceDefaults.csproj" />
+        <ProjectReference Include="..\Common\Common.csproj"/>
+        <ProjectReference Include="..\Contracts\Contracts.csproj"/>
     </ItemGroup>
 
 </Project>
