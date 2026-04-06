@@ -10,7 +10,7 @@ services:
       - "aspire"
     restart: "always"
   keycloack:
-    image: "quay.io/keycloak/keycloak:26.4"
+    image: "quay.io/keycloak/keycloak:26.5"
     command:
       - "start"
       - "--import-realm"
@@ -89,15 +89,11 @@ services:
   question-service:
     image: "${QUESTION_SERVICE_IMAGE}"
     environment:
-      OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES: "true"
-      OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES: "true"
       OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY: "in_memory"
       ASPNETCORE_FORWARDEDHEADERS_ENABLED: "true"
       HTTP_PORTS: "${QUESTION_SERVICE_PORT}"
       KEYCLOACK_HTTP: "http://keycloack:8080"
       services__keycloack__http__0: "http://keycloack:8080"
-      KEYCLOACK_MANAGEMENT: "http://keycloack:9000"
-      services__keycloack__management__0: "http://keycloack:9000"
       KEYCLOACK_KEYCLOAK: "keycloak://keycloack:8080"
       services__keycloack__keycloak__0: "keycloak://keycloack:8080"
       ConnectionStrings__questionDb: "Host=postgres;Port=5432;Username=postgres;Password=${POSTGRES_PASSWORD};Database=questionDb"
@@ -131,14 +127,12 @@ services:
   search-service:
     image: "${SEARCH_SERVICE_IMAGE}"
     environment:
-      OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES: "true"
-      OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES: "true"
       OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY: "in_memory"
       ASPNETCORE_FORWARDEDHEADERS_ENABLED: "true"
       HTTP_PORTS: "${SEARCH_SERVICE_PORT}"
       typesense-api-key: "${TYPESENSE_API_KEY}"
       TYPESENSE_TYPESENSE: "http://typesense:8108"
-      services__typesense__typesense__0: "http://typesense:8108"
+      services__typesense__http__0: "http://typesense:8108"
       ConnectionStrings__messaging: "amqp://guest:${MESSAGING_PASSWORD}@messaging:5672"
       MESSAGING_HOST: "messaging"
       MESSAGING_PORT: "5672"
@@ -158,7 +152,7 @@ services:
     networks:
       - "aspire"
   gateway:
-    image: "mcr.microsoft.com/dotnet/nightly/yarp:2.3.0-preview.4"
+    image: "mcr.microsoft.com/dotnet/nightly/yarp:2.3-preview"
     command:
       - "/app/yarp.dll"
     entrypoint:
