@@ -14,12 +14,8 @@ builder.AddServiceDefaults();
 builder.Services.AddMemoryCache();
 builder.Services.AddScoped<TagService>();
 
-builder.Services.AddAuthentication()
-    .AddKeycloakJwtBearer(serviceName: "keycloack", realm: "joverflow", options =>
-    {
-        options.RequireHttpsMetadata = false;
-        options.Audience = "joverflow";
-    });
+builder.Services.AddKeycloakAuthentication();
+
 builder.AddNpgsqlDbContext<QuestionDbContext>("questionDb");
 
 await builder.UseWolverineWithRabbitMqAsync(options =>
