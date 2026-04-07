@@ -11,7 +11,6 @@ var keycloak = builder.AddKeycloak("keycloack", 6001)
     .WithRealmImport("../infra/realms")
     .WithEnvironment("KC_HTTP_ENABLED", "true")
     .WithEnvironment("KC_HOSTNAME_STRICT", "false")
-    .WithEndpoint(6001, 8080, "keycloak", isExternal: true)
     .WithEnvironment("VIRTUAL_HOST", "id.joverflow.local")
     .WithEnvironment("VIRTUAL_PORT", "8080");
 #pragma warning restore ASPIRECERTIFICATES001
