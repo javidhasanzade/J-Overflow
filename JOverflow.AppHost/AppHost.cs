@@ -1,3 +1,5 @@
+using Microsoft.Extensions.Hosting;
+
 var builder = DistributedApplication.CreateBuilder(args);
 
 var compose = builder.AddDockerComposeEnvironment("production")
@@ -9,7 +11,9 @@ var keycloak = builder.AddKeycloak("keycloack", 6001)
     .WithRealmImport("../infra/realms")
     .WithEnvironment("KC_HTTP_ENABLED", "true")
     .WithEnvironment("KC_HOSTNAME_STRICT", "false")
-    .WithEndpoint(6001, 8080, "keycloak", isExternal: true);
+    .WithEndpoint(6001, 8080, "keycloak", isExternal: true)
+    .WithEnvironment("VIRTUAL_HOST", "id.joverflow.local")
+    .WithEnvironment("VIRTUAL_PORT", "8080");
 #pragma warning restore ASPIRECERTIFICATES001
 
 var postgres = builder.AddPostgres("postgres", port: 5433)
@@ -56,6 +60,15 @@ var yarp = builder.AddYarp("gateway")
         yarpBuilder.AddRoute("/search/{**catch-all}", searchService);
     })
     .WithEnvironment("ASPNETCORE_URLS", "http://*:8001")
-    .WithEndpoint(port: 8001, targetPort: 8001, scheme: "http", name: "gateway", isExternal: true);
+    .WithEndpoint(port: 8001, targetPort: 8001, scheme: "http", name: "gateway", isExternal: true)
+    .WithEnvironment("VIRTUAL_HOST", "api.joverflow.local")
+    .WithEnvironment("VIRTUAL_PORT", "8001");
+
+if (!builder.Environment.IsDevelopment())
+{
+    builder.AddContainer("nginx-proxy", "nginxproxy/nginx-proxy", "1.8")
+        .WithEndpoint(80, 80, "nginx", isExternal: true)
+        .WithBindMount("/var/run/docker.sock", "/tmp/docker.sock", true);
+}
 
 builder.Build().Run();
